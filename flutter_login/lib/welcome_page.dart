@@ -23,7 +23,11 @@ class WelcomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white
                   ),
-                  child: Center(child: Text('Welcome Back', textAlign: TextAlign.center,style: TextStyle(color: CustomColors.jet, fontSize: 24),)),
+                  child: Center(
+                    child: Text(
+                      'Welcome Back', textAlign: TextAlign.center,style: TextStyle(color: CustomColors.jet, fontSize: 24),
+                    ),
+                  ),
                 ),
               ],
             ),
