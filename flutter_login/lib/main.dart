@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login/custom_colors.dart';
+import 'package:flutter_login/custom_page_route.dart';
+import 'package:flutter_login/welcome_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,12 +32,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  bool _isLoggedIn = false;
+  int _animatedId = 0;
 
-  void _loggingIn() {
-    new Timer(Duration(seconds: 2), () {
-      setState(() {
-        _isLoggedIn = true;
+  Widget _renderWidget(Function onPress) {
+    return _animatedId == 0 ? LoginButton(pressFunction: onPress,) : Container(color: CustomColors.middleBluePurple, height: 40,); //CustomProgress();
+  }
+
+  Widget _updateWidget() {
+    setState(() {
+      _animatedId = _animatedId == 0 ? 1 : 0;
+      Timer(Duration(seconds: 1), () {
+        Navigator.of(context).push(CustomPageRoute(WelcomePage()));
       });
     });
   }
@@ -57,8 +64,13 @@ class _LoginPageState extends State<LoginPage> {
                   height: 200,
                   child: Image.asset('assets/images/flutter_image.png'),
                 ),
-                SizedBox(
-                  height: 80
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Container(
+                    height: 80,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(child: Text('Welcome Back!', style: TextStyle(color: CustomColors.slateBlue, fontSize: 36, fontWeight: FontWeight.w700),)),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -103,18 +115,37 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: CustomColors.slateBlue
-                      ),
-                      onPressed: () {
-                        _loggingIn();
-                      },
-                      child: _isLoggedIn ? Text('Logged In') : Text('Log In')
+                AnimatedSwitcher(
+                  duration: const Duration(seconds: 1),
+                  child: _renderWidget(_updateWidget),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 16.0, right: 16.0),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text('Forgot Password?', style: TextStyle(color: CustomColors.jet, fontSize: 16),)
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 60.0, left: 24.0, bottom: 16.0),
+                    child: Text('Don\'t have an account yet?', style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 24.0),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        'Sign Up', style: TextStyle(color: CustomColors.jet ,fontSize: 16),
+                      )
                     ),
                   ),
                 ),
@@ -123,6 +154,44 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+
+  final VoidCallback pressFunction;
+
+  const LoginButton({Key key, this.pressFunction}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SizedBox(
+        height: 40,
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: CustomColors.slateBlue
+          ),
+          onPressed: pressFunction,
+          child: Text('Log In')
+        ),
+      ),
+    );
+  }
+}
+
+class CustomProgress extends StatelessWidget {
+  const CustomProgress({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CircularProgressIndicator(
+      valueColor: AlwaysStoppedAnimation<Color>(CustomColors.electricBlue),
     );
   }
 }
