@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/custom_colors.dart';
 
 class CustomPageRoute<T> extends PageRoute<T> {
-      CustomPageRoute(this.child);
+      CustomPageRoute(this.child, this.duration);
       @override
       Color get barrierColor => CustomColors.middleBluePurple;
 
@@ -10,6 +10,7 @@ class CustomPageRoute<T> extends PageRoute<T> {
       String get barrierLabel => null;
 
       final Widget child;
+      final int duration;
 
       @override
       Widget buildPage(BuildContext context, Animation<double> animation,
@@ -24,5 +25,5 @@ class CustomPageRoute<T> extends PageRoute<T> {
       bool get maintainState => true;
 
       @override
-      Duration get transitionDuration => Duration(seconds: 1);
+      Duration get transitionDuration => Duration(milliseconds: duration);
     }

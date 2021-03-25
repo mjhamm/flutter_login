@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_login/custom_colors.dart';
 import 'package:flutter_login/custom_page_route.dart';
 import 'package:flutter_login/forgot_password.dart';
+import 'package:flutter_login/sign_up_page.dart';
 import 'package:flutter_login/welcome_page.dart';
 
 void main() {
@@ -37,14 +38,16 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   int _animatedId = 0;
 
   Widget _renderWidget(Function onPress) {
-    return _animatedId == 0 ? LoginButton(pressFunction: onPress,) : Container(color: CustomColors.middleBluePurple, height: 40,); //CustomProgress();
+    return _animatedId == 0 ? LoginButton(pressFunction: onPress, buttonText: 'Log In',) : Container(color: CustomColors.middleBluePurple, height: 40,); //CustomProgress();
   }
 
   void _updateWidget() {
     setState(() {
       _animatedId = _animatedId == 0 ? 1 : 0;
+      //Sign in code()
+      //if successful ->
       Timer(Duration(seconds: 1), () {
-        Navigator.of(context).push(CustomPageRoute(WelcomePage()));
+        Navigator.of(context).push(CustomPageRoute(WelcomePage(), 1000));
       });
     });
   }
@@ -52,7 +55,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(
+      value: SystemUiOverlayStyle.light.copyWith(
         statusBarColor: CustomColors.middleBluePurple
       ),
       child: SafeArea(
@@ -128,9 +131,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: _renderWidget(_updateWidget),
                     ),
                     Align(
-                      alignment: Alignment.centerRight,
+                      alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 16.0, right: 16.0),
+                        padding: const EdgeInsets.only(left: 16.0, top: 24.0, right: 16.0),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPassword()));
@@ -142,7 +145,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 60.0, left: 24.0, bottom: 16.0),
+                        padding: const EdgeInsets.only(top: 60.0, left: 16.0, bottom: 16.0),
                         child: Text('Don\'t have an account yet?', style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
                       ),
@@ -150,9 +153,12 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 24.0),
+                        padding: const EdgeInsets.only(left: 16.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpPage()));
+                            Navigator.of(context).push(CustomPageRoute(SignUpPage(), 500));
+                          },
                           child: Text(
                             'Sign Up', style: TextStyle(color: CustomColors.jet ,fontSize: 16),
                           )
@@ -173,8 +179,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 class LoginButton extends StatelessWidget {
 
   final VoidCallback pressFunction;
+  final String buttonText;
 
-  const LoginButton({Key key, this.pressFunction}) : super(key: key);
+  const LoginButton({Key key, this.pressFunction, this.buttonText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +195,7 @@ class LoginButton extends StatelessWidget {
             primary: CustomColors.slateBlue
           ),
           onPressed: pressFunction,
-          child: Text('Log In')
+          child: Text(buttonText)
         ),
       ),
     );
