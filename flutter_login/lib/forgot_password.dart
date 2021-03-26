@@ -30,7 +30,7 @@ class ForgotPassword extends StatelessWidget {
                     'Enter the email associated with your account and we\'ll send an email with instructions to reset your password.',
                     style: TextStyle(
                       color: CustomColors.jet,
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w600
                     ),
                   ),
@@ -66,7 +66,7 @@ class ForgotPassword extends StatelessWidget {
                         primary: CustomColors.slateBlue
                       ),
                       onPressed: () {},
-                      child: Text('Send Instructions',)
+                      child: Text('Send Instructions', style: TextStyle(fontSize: 16),)
                     ),
                   ),
                 ),

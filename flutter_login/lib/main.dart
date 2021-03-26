@@ -131,9 +131,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: _renderWidget(_updateWidget),
                     ),
                     Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 24.0, right: 16.0),
+                        padding: const EdgeInsets.only(top: 24.0, right: 16.0),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPassword()));
@@ -142,27 +142,27 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 60.0, left: 16.0, bottom: 16.0),
-                        child: Text('Don\'t have an account yet?', style: TextStyle(color: Colors.black, fontSize: 16),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpPage()));
-                            Navigator.of(context).push(CustomPageRoute(SignUpPage(), 500));
-                          },
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                          padding: const EdgeInsets.only(right: 12.0),
                           child: Text(
-                            'Sign Up', style: TextStyle(color: CustomColors.jet ,fontSize: 16),
-                          )
-                        ),
+                            'Don\'t have an account yet?', style: TextStyle(color: Colors.black, fontSize: 16),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpPage()));
+                              Navigator.of(context).push(CustomPageRoute(SignUpPage(), 500));
+                            },
+                            child: Text(
+                              'Sign Up', style: TextStyle(color: CustomColors.jet ,fontSize: 16),
+                            )
+                          ),
+                        ],
                       ),
                     ),
                   ],
