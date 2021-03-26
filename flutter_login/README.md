@@ -1,16 +1,3 @@
 # flutter_login
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is a basic login screen made to show flutter and how easily a design can be turned into a working model. Forgot password brings you to a template for sending reset password instructions, while the log in and sign up text use a custom fade transition that would be nice to see in an app setting.
